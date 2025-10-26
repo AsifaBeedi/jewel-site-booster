@@ -1,5 +1,7 @@
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
+import { TrackableButton } from "@/components/TrackableButton";
+import { trackPageVisit } from "@/lib/analytics";
 import { Sparkles, Heart, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-jewelry.jpg";
 import necklaceImage from "@/assets/necklace.jpg";
@@ -7,6 +9,10 @@ import earringsImage from "@/assets/earrings.jpg";
 import braceletImage from "@/assets/bracelet.jpg";
 
 const Index = () => {
+  useEffect(() => {
+    trackPageVisit('/');
+  }, []);
+
   const collections = [
     {
       name: "Celestial Necklaces",
@@ -54,12 +60,23 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 text-muted-foreground font-sans max-w-2xl mx-auto">
             Discover exquisite handcrafted jewelry that celebrates your unique story
           </p>
-          <Button 
-            size="lg" 
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-sans font-medium px-8 py-6 text-lg shadow-elegant hover:scale-105 transition-all"
-          >
-            Explore Collections
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <TrackableButton 
+              trackingId="hero-explore-collections"
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-sans font-medium px-8 py-6 text-lg shadow-elegant hover:scale-105 transition-all"
+            >
+              Explore Collections
+            </TrackableButton>
+            <TrackableButton 
+              trackingId="hero-buy-now"
+              size="lg"
+              variant="secondary"
+              className="font-sans font-medium px-8 py-6 text-lg shadow-elegant hover:scale-105 transition-all"
+            >
+              Buy Now
+            </TrackableButton>
+          </div>
         </div>
       </section>
 
@@ -88,7 +105,14 @@ const Index = () => {
                 </div>
                 <div className="p-6">
                   <h4 className="text-2xl font-serif font-semibold mb-2">{collection.name}</h4>
-                  <p className="text-muted-foreground font-sans">{collection.description}</p>
+                  <p className="text-muted-foreground font-sans mb-4">{collection.description}</p>
+                  <TrackableButton
+                    trackingId={`collection-learn-more-${index}`}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    Learn More
+                  </TrackableButton>
                 </div>
               </Card>
             ))}
@@ -151,13 +175,24 @@ const Index = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto font-sans opacity-90">
             Let us help you find the perfect piece that speaks to your soul
           </p>
-          <Button 
-            size="lg"
-            variant="secondary"
-            className="font-sans font-medium px-8 py-6 text-lg shadow-elegant hover:scale-105 transition-all"
-          >
-            Schedule Consultation
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <TrackableButton 
+              trackingId="cta-schedule-consultation"
+              size="lg"
+              variant="secondary"
+              className="font-sans font-medium px-8 py-6 text-lg shadow-elegant hover:scale-105 transition-all"
+            >
+              Schedule Consultation
+            </TrackableButton>
+            <TrackableButton 
+              trackingId="cta-contact-us"
+              size="lg"
+              variant="outline"
+              className="font-sans font-medium px-8 py-6 text-lg bg-white/10 border-white/20 hover:bg-white/20 shadow-elegant hover:scale-105 transition-all"
+            >
+              Contact Us
+            </TrackableButton>
+          </div>
         </div>
       </section>
 
