@@ -1,76 +1,36 @@
-# Welcome to your Lovable project
+﻿# Jewel Site Booster
 
-## Project info
+Small, focused frontend for a jewelry landing page with simple analytics.
 
-**URL**: https://lovable.dev/projects/3ebaa757-69e5-4796-9d76-413972425f30
+What this repo contains
+- React + TypeScript frontend built with Vite
+- Tailwind CSS for styling
+- A lightweight analytics pipeline: client-side event calls in `src/lib/analytics.ts` and a Supabase Edge Function at `supabase/functions/track-event/index.ts` that inserts into Postgres tables (`page_visits`, `click_events`).
 
-## How can I edit this code?
+Quick start (local)
+1. Install deps: `npm install`
+2. Copy `.env.example` -> `.env` and fill client vars (do not commit `.env`)
+3. Run dev server: `npm run dev`
 
-There are several ways of editing your application.
+Env notes
+- Frontend (client) needs only public keys:
+	- VITE_SUPABASE_URL
+	- VITE_SUPABASE_PUBLISHABLE_KEY
+- Server function requires the service key and must be set in Supabase function runtime:
+	- SUPABASE_SERVICE_ROLE_KEY (server-only)
 
-**Use Lovable**
+Deploy notes
+- Host the frontend (Vercel recommended). Add the `VITE_*` vars in Vercel Project Settings and redeploy — Vite embeds envs at build time.
+- Deploy the Edge Function to your Supabase project and set `SUPABASE_SERVICE_ROLE_KEY` in the function runtime.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3ebaa757-69e5-4796-9d76-413972425f30) and start prompting.
+Testing & verification
+- Use the browser DevTools Network tab to watch POSTs to `/functions/v1/track-event`.
+- Check Supabase Dashboard → Functions → Logs for function activity and Database → Table Editor for inserted rows.
 
-Changes made via Lovable will be committed automatically to this repo.
+Security
+- Never commit service keys. Keep `.env` in `.gitignore` and use `.env.example` for onboarding.
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3ebaa757-69e5-4796-9d76-413972425f30) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+If you want a shorter or longer README, or a separate `DEPLOY.md` / `SECURITY.md`, tell me which and I’ll add it.
 
 ## About this repo
 
