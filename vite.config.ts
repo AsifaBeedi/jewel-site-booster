@@ -9,6 +9,11 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  define: {
+    'import.meta.env.VITE_SUPABASE_PROJECT_ID': JSON.stringify('lqvogoyvfkkuypgudduu'),
+    'import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY': JSON.stringify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxxdm9nb3l2ZmtrdXlwZ3VkZHV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxOTQ1NTEsImV4cCI6MjA3ODc3MDU1MX0.Qez-u27SXYPeAcPSwgLaJkQTcSXfu3LMwkITT-mkSmQ'),
+    'import.meta.env.VITE_SUPABASE_URL': JSON.stringify('https://lqvogoyvfkkuypgudduu.supabase.co'),
+  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
